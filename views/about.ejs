@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include header %>
+<body>
+  <% include navbar %>
+  
+  <div id="main_area">
+    <div class="container">
+      <div class="panel panel-default">
+        <div class="panel-body">
+	  
+	  <h1>Sovelluksesta</h1>
+
+	  <p>Pääidea on ikäihmisten kiinnostuksien kohteiden mukainen Tampereen 3D-kartta. Tarkoitus on, että kun sovelluksen ideoija Marko Suvila esittelee sovellusta <a href="http://likioma.fi/">Likioma-projektissa</a>, niin ikäihmisiltä tulisi ideoita, millaisia sovelluksia heille voisi avoimen paikkatiedon pohjalta toteuttaa.</p>
+
+	  <p>Sovelluksen ensimmäisellä 3D-karttalehdellä on esillä erityisesti ikäihmisiä kiinnostavia avoimien aineistojen kohteita kuten kahviloita, uimahalleja, kirjastoja, tapahtuma- ja virkistyskohteita sekä bussit sijaintinsa mukaan. Toisella 3D-karttalehdellä on esitetty Hämeenpuiston ja Satakunnankadun risteyksen liikennevalojen reaaliaikainen tilanne. Liikennevalovisualisointi ei ole erityisesti ikäihmisille suunnattu, mutta luonnollisesti ikäihmisetkin liikkuvat kävellen ja autoillen liikenteessä, joten myös sen osalta heiltä voi tulla sovellusideoita.</p>
+
+	  <p>Työ poikkeaa monista 3D-karttasovelluksista siinä, että kartalla on tuotu erityisesti kohdeyleisöä kiinnostava tieto esiin eli esimerkiksi rakennuksia, lukuunottamatta joitakin maamerkkejä, ei ole esitetty 3D-muodossa vaan kiinnostava tieto on esitetty 3D-ikoneina kartalla.</p>
+
+	  <h2>Tiimi</h2>
+	  
+	  <p><img class="team_image" width="100" height="100" src="https://scontent-arn2-1.xx.fbcdn.net/hprofile-xpt1/v/t1.0-1/c0.0.160.160/p160x160/10609460_10152377367762555_8054706544449609269_n.jpg?oh=ffd745830ecb4c744310927205198e19&oe=56C1012B"><b>Marko Suvila</b>:lla oli idea tehdä 3D-kartta ikäihmisille.</p>
+
+	  <p><img class="team_image" width="100" height="100" src="https://scontent-arn2-1.xx.fbcdn.net/hprofile-xaf1/v/t1.0-1/c25.0.150.150/1970584_10152206121838959_16069722_n.jpg?oh=39e3925d39a3302f00ba094e8bb5ccb8&oe=56C0426B"><b>Erno Mäkinen</b> toteutti Marko Suvilan idean.</p>
+
+	  <h2>3D-mallit</h2>
+
+	  <p>Sovellusta varten Erno Mäkisen luomat 3D-mallit ovat käytettävissä <a href="https://creativecommons.org/licenses/by/4.0/deed.fi" target="_blank">CC-BY 4.0 -lisenssin</a> mukaisesti. Vapaan lähdekoodin <a href="https://www.blender.org/">Blender</a> -sovelluksen .blend-projektitiedostot ja tämän sovelluksen 3D-toteutuksessa käytetyn vapaan lähdekoodin <a href="http://threejs.org/">Three.js</a>-kirjastoon luettavat OBJMTL-mallit ovat <a href="/3d/models.html">omalla sivullaan</a>.
+
+	  <h2>Sovelluksen lähdekoodi</h2>
+	
+	  <p>Lähdekoodi on julkaistu <a href="https://github.com/ernoma/liki3d" target="_blank">GitHubissa.</a></p>
+	  
+	  <h1>Sovelluksessa hyödynnetty avoin data</h1>
+
+	  <ul>
+            <li>Tampereen kaupungin uimahallit ja kirjastot aineistoja, 2015, <a href="http://www.tampere.fi/tampereen-kaupunki/tietoa-tampereesta/avoin-data.html" target="_blank">data.tampere.fi</a>, <a href="http://www.tampere.fi/tampereen-kaupunki/tietoa-tampereesta/avoin-data/avoin-data-lisenssi.html" target="_blank">Tampereen kaupungin Avoin data -lisenssi</a> ja <a href="http://visittampere.fi/api-docs/#!/default/search_get" target="_blank">VisitTampere API</a>:n kohdeaineistoja, <a href="https://creativecommons.org/licenses/by/4.0/deed.fi" target="_blank">CC-BY 4.0 -lisenssi</a></li>
+            <li>Maanmittauslaitoksen ortoilmakuva ja korkeusemalli-aineistoja, 09/2015, <a href="http://www.maanmittauslaitos.fi/avoimen-tietoaineiston-cc-40-lisenssi" target="_blank">CC BY 4.0 -lisenssi</a></li>
+	    <li>ITS Factoryn reaaliaikaista liikennevalo aineistoa, 2015, <a href="http://data.itsfactory.fi/files/trafficlights/" target="_blank">lisätietoja</a> ja reaaliaikaista bussien sijaintitietoa, 2015,  <a href="http://wiki.itsfactory.fi/index.php/Tampere_Public_Transport_SIRI_Interface_(Realtime_JSON_at_data.itsfactory.fi)" target="_blank">lisätietoja</a>, <a href="http://www.tampere.fi/tampereen-kaupunki/tietoa-tampereesta/avoin-data/avoin-data-lisenssi.html" target="_blank">Tampereen kaupungin Avoin data -lisenssi</a></li>
+	    <li>Teosto Open API:n vuoden 2014 aineistoja, <a href="http://api.teosto.fi/termsandconditions.html" target="_blank">käyttöehdot</a></li>
+	    <li>OpenStreetMapin aineistoja, <a href="http://www.openstreetmap.org/copyright" target="_blank">CC-BY-SA 2.0 -lisenssi</a></li>
+	    <li>OKF.fi Geocoder API:a, joka on pääasiassa Mikael Rekolan toteuttama, VisitTampere API:n osoitteiden koordinaateiksi muuntamiseen, <a href="http://api.okf.fi/console/" target="_blank">testi-konsoli, </a><a href="http://books.okf.fi/geocoder/johdanto/" target="_blank">käyttöohjeet, </a><a href="https://github.com/rekola/okffi-geocoder" target="_blank">lähdekoodi.</a> OKF.fi Geocoder hyödyntää erilaisia avoimia suomalaisia datalähteitä.</li>
+	  </ul>
+	</div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+    $('#about').addClass("active");
+    });
+  </script>
+</body>
+</html>
