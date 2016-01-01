@@ -60,3 +60,10 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
+
+//
+// Heroku provides process.env.PORT, locally use the port 8080
+//
+var port = process.env.PORT || 8080;
+app.listen(port);
+console.log('The magic happens on port ' + port);
