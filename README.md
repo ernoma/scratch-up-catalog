@@ -10,7 +10,7 @@ There are also some additional notes with (at leas at the moment) misleading nam
 
 <ul>
     <li>Add user, list users based on their skills
-    <li>Add project, list projects with their status
+    <li>Add project idea, list projects with their status
     <li>Allow user to easily ask other user to join project
 </ul>
 
