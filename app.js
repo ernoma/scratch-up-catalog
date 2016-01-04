@@ -5,11 +5,20 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
-var idea  = require('./routes/idea');
-var volunteer = require('./routes/volunteer');
-var about = require('./routes/about');
-//var users = require('./routes/users');
+var mongoose = require('mongoose');
+var passport = require('passport');
+var flash = require('connect-flash');
+var session = require('express-session');
+
+env = (function(){
+    var Habitat = require("habitat");
+    Habitat.load();
+    return new Habitat();
+}());
+
+var configDB = require('./config/database.js');
+mongoose.connect(configDB.url);
+require('./config/passport')(passport); // pass passport for configuration
 
 var app = express();
 
@@ -25,10 +34,26 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/idea', idea);
-app.use('/volunteer', volunteer);
-app.use('/about', about);
+// required for passport
+app.use(session({ secret: env.get("SESSION_SECRET") })); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
+
+// routes ======================================================================
+require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+
+//var routes = require('./routes/index');
+//var idea  = require('./routes/idea');
+//var volunteer = require('./routes/volunteer');
+//var about = require('./routes/about');
+//var users = require('./routes/users');
+
+
+//app.use('/', routes);
+//app.use('/idea', idea);
+//app.use('/volunteer', volunteer);
+//app.use('/about', about);
 //app.use('/users', users);
 
 
