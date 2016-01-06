@@ -5,16 +5,40 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
   <% include navbar %>
+  <div class="container">
+    <div class="panel panel-default">
+        <div class="panel-body">
 
-  <div id="main_area">
-    <div class="container">
-    </div><!-- /container -->
-  </div>
+	  <h1>Add Idea</h1>
+
+	  <form>
+	    <div class="form-group">
+	      <label for="title">Idea title</label>
+	      <input type="text" class="form-control" id="title" placeholder="Title for the idea">
+	    </div>
+	    <div class="form-group">
+              <label for="description">Description</label>
+	      <textarea class="form-control" rows="10" id="description" placeholder="Detailed description of the idea"></textarea>
+	    </div>
+	    <div class="checkbox">
+	      <label>
+		<% if (typeof user == "undefined") { %>
+		<input type="checkbox" id="cb_include_user_for_idea"> Include my name and contact info with the idea
+		<% } else { %>
+		<input type="checkbox" id="cb_include_user_for_idea" checked> Include my name and contact info with the idea
+		<% } %>
+	      </label>
+	    </div>
+	    <button type="submit" class="btn btn-default">Submit</button>
+	  </form>
+	</div><!-- /panel-body -->
+    </div><!-- /panel -->
+  </div><!-- /container -->
 
   <% include footer %>
 
   <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-  <script type="text/javascript" src="/js/index.js"></script>
+  <script type="text/javascript" src="/js/idea.js"></script>
 </body>
 </html>
