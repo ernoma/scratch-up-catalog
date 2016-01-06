@@ -10,14 +10,7 @@ var passport = require('passport');
 var flash = require('connect-flash');
 var session = require('express-session');
 
-env = (function(){
-    var Habitat = require("habitat");
-    Habitat.load();
-    return new Habitat();
-}());
-
-var configDB = require('./config/database.js');
-mongoose.connect(configDB.url);
+mongoose.connect(process.env.DATABASE_URL);
 require('./config/passport')(passport); // pass passport for configuration
 
 var app = express();
@@ -35,7 +28,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // required for passport
-app.use(session({ secret: env.get("SESSION_SECRET") })); // session secret
+app.use(session({ secret: process.env.SESSION_SECRET })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
