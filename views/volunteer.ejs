@@ -7,27 +7,33 @@
   <% include navbar %>
 
   <div class="container">
+
+    <h1>Volunteer</h1>
+
     <div class="panel panel-default">
         <div class="panel-body">
 	  
-	  <h1>Volunteer</h1>
-
 	  <div class="btn-group">
 	    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	      Choose interesting role <span class="caret"></span>
 	    </button>
 	    <ul class="dropdown-menu">
-	      <li><a href="#">Software Developer / Designer</a></li>
-	      <li><a href="#">UI / UX / Graphic Designer</a></li>
-	      <li><a href="#">Sysadmin</a></li>
-	      <li><a href="#">Visual artist</a></li>
-	      <li><a href="#">Musician</a></li>
-	      <li><a href="#">Marketing</a></li>
-	      <li><a href="#">Leading / Management</a></li>
-	      <li><a href="#">Other</a></li>
+	      <li><a id="developer" href="#">Software Developer / Designer</a></li>
+	      <li><a id="designer" href="#">UI / UX / Graphic Designer</a></li>
+	      <li><a id="admin" href="#">Sysadmin</a></li>
+	      <li><a id="artist" href="#">Visual artist</a></li>
+	      <li><a id="musician" href="#">Musician</a></li>
+	      <li><a id="marketer" href="#">Marketing</a></li>
+	      <li><a id="manager" href="#">Leading / Management</a></li>
+	      <li><a id="other" href="#">Other</a></li>
 	    </ul>
 	  </div>
 	</div><!-- /panel-body -->
+    </div><!-- /panel -->
+    <div class="panel panel-default" id="role_contents">
+      <div class="panel-body">
+	<p>Relevant content for the selected role comes here</p>
+      </div><!-- /panel-body -->
     </div><!-- /panel -->
   </div><!-- /container -->
 
@@ -35,6 +41,6 @@
 
   <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-  <script type="text/javascript" src="/js/index.js"></script>
+  <script type="text/javascript" src="/js/volunteer.js"></script>
 </body>
 </html>
