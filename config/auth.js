@@ -2,13 +2,13 @@ module.exports = {
 
     'facebookAuth' : {
         'clientID'      : '551603578325099', // your App ID
-        'clientSecret'  : 'fa17e3faab4b345d88856a7aafde947b', // your App Secret
-        'callbackURL'   : 'http://trenature.herokuapp.com/auth/facebook/callback'
+        'clientSecret'  : process.env.FACEBOOK_SECRET, // your App Secret
+        'callbackURL'   : 'http://scratch-up-catalog.herokuapp.com/auth/facebook/callback'
     },
     'googleAuth' : {
-        'clientID'      : '952980998920-ubads21n32ndr59jh9ilbeghqad19q2v.apps.googleusercontent.com',
-        'clientSecret'  : 'v3oxktJi9VX6GiXYFGXHFbjp',
-        'callbackURL'   : 'http://trenature.herokuapp.com/auth/google/callback'
+        'clientID'      : '210610397451-f9b38718q039gb7gke89gim00fdjqb48.apps.googleusercontent.com',
+        'clientSecret'  : process.env.GOOGLE_SECRET,
+        'callbackURL'   : 'http://scratch-up-catalog.herokuapp.com/auth/google/callback'
     }
 
 };
