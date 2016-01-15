@@ -20,6 +20,13 @@
               <label for="description">Description</label>
 	      <textarea class="form-control" rows="10" id="description" placeholder="Detailed description of the idea"></textarea>
 	    </div>
+	    <p>Select volunteer roles needed:</p>
+	    <% for(var i = 0; i < roles.length; i++) {%>
+	       <label class="checkbox-inline">
+		 <input type="checkbox" value="" id="role_<%= roles[i].name %>"> <%= roles[i].name %>
+	       </label>
+	    <% } %>
+
 	    <div class="checkbox">
 	      <label>
 		<% if (typeof user == "undefined") { %>

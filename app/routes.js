@@ -1,4 +1,4 @@
-module.exports = function(app, passport) {
+module.exports = function(app, passport, Role) {
 
     // =====================================
     // HOME PAGE (with login links) ========
@@ -15,11 +15,13 @@ module.exports = function(app, passport) {
     //
     
     app.get('/idea', function(req, res) {
-	res.render('idea.ejs', {
-            user: req.user ? req.user : undefined,
-            title: 'Scratch Up Catalog'
-	    
-        });
+	Role.find({}, function(err, roles) {
+	    res.render('idea.ejs', {
+		user: req.user ? req.user : undefined,
+		title: 'Scratch Up Catalog',
+		roles: roles
+            });
+	});
     });
     
     app.get('/volunteer', function(req, res) {
