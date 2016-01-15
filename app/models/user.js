@@ -2,10 +2,7 @@ var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
 
 var userSchema = mongoose.Schema({
-    userRole: {
-	type: mongoose.Schema.Types.ObjectId,
-	ref: 'Role'
-    },
+    description: String,
     local            : {
         email        : String,
         password     : String,

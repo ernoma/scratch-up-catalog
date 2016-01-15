@@ -18,6 +18,7 @@ module.exports = function(app, passport) {
 	res.render('idea.ejs', {
             user: req.user ? req.user : undefined,
             title: 'Scratch Up Catalog'
+	    
         });
     });
     
