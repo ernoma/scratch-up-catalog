@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
 
 var RoleSchema = mongoose.Schema({
-    name: String
+    name: String,
+    short_name: String
 });
 
 var Role = mongoose.model("Role", RoleSchema);
@@ -17,14 +18,16 @@ Role.find({}, function(err, roles) {
     //
     if (roles.length == 0) {
 	var roleNames = ['Software Developer / Designer', 'UI / UX / Graphic Designer', 'Sysadmin', 'Visual Artist', 'Musician', 'Marketing', 'Leading / Management'];
-	createInitialRoles(roleNames);
+	var shortNames = ['developer', 'designer', 'admin', 'artist', 'musician', 'marketer', 'manager'];
+	createInitialRoles(roleNames, shortNames);
     }
 });
 
-function createInitialRoles(roleNames) {
+function createInitialRoles(roleNames, shortNames) {
     for (var i = 0; i < roleNames.length; i++) {
 	var newRole = Role({
-	    name: roleNames[i]
+	    name: roleNames[i],
+	    short_name: shortNames[i]
 	});
 	newRole.save(function(err) {
 	    if (err) throw err;

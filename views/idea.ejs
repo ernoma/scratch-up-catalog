@@ -23,9 +23,12 @@
 	    <p>Select volunteer roles needed:</p>
 	    <% for(var i = 0; i < roles.length; i++) {%>
 	       <label class="checkbox-inline">
-		 <input type="checkbox" value="" id="role_<%= roles[i].name %>"> <%= roles[i].name %>
+		 <input type="checkbox" value="" id="role_<%= roles[i].short_name %>"> <%= roles[i].name %>
 	       </label>
 	    <% } %>
+	    <label class="checkbox-inline">
+                 <input type="checkbox" value="" id="role_other"> Other
+            </label>
 
 	    <div class="checkbox">
 	      <label>

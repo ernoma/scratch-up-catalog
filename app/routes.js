@@ -25,10 +25,13 @@ module.exports = function(app, passport, Role) {
     });
     
     app.get('/volunteer', function(req, res) {
-        res.render('volunteer.ejs', {
-            user: req.user ? req.user : undefined,
-            title: 'Scratch Up Catalog'
-        });
+	Role.find({}, function(err, roles) {
+            res.render('volunteer.ejs', {
+		user: req.user ? req.user : undefined,
+		title: 'Scratch Up Catalog',
+		roles: roles
+            });
+	});
     });
 
     app.get('/about', function(req, res) {
@@ -72,10 +75,13 @@ module.exports = function(app, passport, Role) {
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/profile', isLoggedIn, function(req, res) {
-        res.render('profile.ejs', {
-            user : req.user,// get the user out of session and pass to template
-	    title: 'Scratch Up Catalog'
-        });
+        Role.find({}, function(err, roles) {
+	    res.render('profile.ejs', {
+		user : req.user,// get the user out of session and pass to template
+		title: 'Scratch Up Catalog',
+		roles: roles
+            });
+	});
     });
 
     // =====================================

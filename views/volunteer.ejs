@@ -18,14 +18,10 @@
 	      Choose interesting role <span class="caret"></span>
 	    </button>
 	    <ul class="dropdown-menu">
-	      <li><a id="developer" href="#">Software Developer / Designer</a></li>
-	      <li><a id="designer" href="#">UI / UX / Graphic Designer</a></li>
-	      <li><a id="admin" href="#">Sysadmin</a></li>
-	      <li><a id="artist" href="#">Visual Artist</a></li>
-	      <li><a id="musician" href="#">Musician</a></li>
-	      <li><a id="marketer" href="#">Marketing</a></li>
-	      <li><a id="manager" href="#">Leading / Management</a></li>
-	      <li><a id="other" href="#">Other</a></li>
+	      <% for(var i = 0; i < roles.length; i++) {%>
+		 <li><a id="role_<%= roles[i].short_name %>" href="#"><%= roles[i].name %></a></li>
+	      <% } %>
+	      <li><a id="role_other" href="#">Other</a></li>
 	    </ul>
 	  </div>
 	</div><!-- /panel-body -->
