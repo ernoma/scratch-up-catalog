@@ -20,26 +20,68 @@
               <label for="description">Description</label>
 	      <textarea class="form-control" rows="10" id="description" placeholder="Detailed description of the idea"></textarea>
 	    </div>
-	    <p>Select volunteer roles needed:</p>
-	    <% for(var i = 0; i < roles.length; i++) {%>
-	       <label class="checkbox-inline">
-		 <input type="checkbox" value="" id="role_<%= roles[i].short_name %>"> <%= roles[i].name %>
-	       </label>
-	    <% } %>
-	    <label class="checkbox-inline">
-                 <input type="checkbox" value="" id="role_other"> Other
-            </label>
-
-	    <div class="checkbox">
-	      <label>
-		<% if (typeof user == "undefined") { %>
-		<input type="checkbox" id="cb_include_user_for_idea"> Include my name and contact info with the idea
-		<% } else { %>
-		<input type="checkbox" id="cb_include_user_for_idea" checked> Include my name and contact info with the idea
-		<% } %>
-	      </label>
+	    <div class="form-group">
+	      <label for="roles">Roles</label>
+	      <span id="roles" class="help-block">Select roles for wanted volunteers</span>
+	      <% for(var i = 0; i < roles.length; i++) {%>
+		 <label class="checkbox">
+		   <input type="checkbox" value="" id="role_<%= roles[i].short_name %>">
+		   <%= roles[i].name %>
+		 </label>
+	      <% } %>
+	      <div class="row">
+		<div class="col-md-1">
+		  <label class="checkbox">
+                    <input type="checkbox" value="" id="role_other">
+		    Other:
+		  </label>
+		</div>
+		<div class="col-md-11">
+		  <input type="text" class="form-control" id="role_other_description" placeholder="Describe..." disabled>
+		</div>
+	      </div>
 	    </div>
-	    <button type="submit" class="btn btn-default">Submit</button>
+	    <div class="form-group">
+	      <label for="photo">Photo</label>
+	      <span class="help-block">For advertisement</span>
+	      <input type="file" id="photo" accept="image/*">
+	    </div>
+	    <div class="form-group">
+	      <label for="status">Status</label>
+	      <span class="help-block">Current status of the idea</span>
+	      <div class="btn-group">
+		<button id="status" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		  Just idea <span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+		  <li><a href="#">Under implementation</a></li>
+		  <li><a href="#">Implemented</a></li>
+		  <li><a href="#">Happy customers</a></li>
+		</ul>
+	      </div>
+	    </div>
+            <div class="form-group">
+              <label for="site">Site</label>
+	      <span class="help-block">You may include if there is already a web page or site for the idea</span>
+              <input type="text" class="form-control" id="title" placeholder="http://yourideasite.com/">
+            </div>
+	    
+	    <div class="row">
+	      <div class="col-md-1">
+	      	<button type="submit" class="btn btn-primary">Submit</button>
+	      </div>
+	      <div class="col-md-11">
+		<div class="checkbox">
+		  <label>
+		    <% if (typeof user == "undefined") { %>
+		    <input type="checkbox" id="cb_include_user_for_idea"> Include my name and contact info with the idea
+		    <% } else { %>
+		    <input type="checkbox" id="cb_include_user_for_idea" checked> Include my name and contact info with the idea
+		    <% } %>
+		  </label>
+		</div>
+	      </div>
+	    </div>
 	  </form>
 	</div><!-- /panel-body -->
     </div><!-- /panel -->
