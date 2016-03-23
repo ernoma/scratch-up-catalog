@@ -265,6 +265,34 @@ module.exports = function(app, passport, User, Role, UserRole, Idea) {
            res.redirect('/profile');
         });
     });
+
+
+    //
+    // Functions to get JSON data from mongoose
+    //
+    app.get('/ideas', function(req, res) {
+        Idea.find({}, function(err, ideas) {
+	    if (err) {
+                console.log(err);
+                return next(err);
+            }
+            
+	    res.json(ideas);
+        });
+    });
+
+    app.get('/roles', function(req, res) {
+        Role.find({}, function(err, roles) {
+            if (err) {
+                console.log(err);
+                return next(err);
+            }
+
+            res.json(roles);
+        });
+    });
+    
+
 };
 
 // route middleware to make sure a user is logged in
