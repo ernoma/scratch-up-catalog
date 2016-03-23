@@ -8,29 +8,36 @@
 
     <div class="page-header text-center">
         <h1><span class="fa fa-anchor"></span> Profile Page</h1>
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+        <!--<a href="/logout" class="btn btn-default btn-sm">Logout</a>-->
     </div>
 
-    <div class="row">
+<!--    <div class="row">
 
       <div class="col-sm-12">
 	<div class="well">
-	  Choose the role best matching your skills:
+	  <form>
+	    <div class="form-group">
+	      <label for="roleSelect">
+		Choose the role best matching your skills:
+	      </label>
+	      <select id="role_select" name="roleSelect" class="form-control">
+		<option>Choose role</option>
+		<% for(var i = 0; i < roles.length; i++) {%>
+                   <option id="role_<%= roles[i].short_name %>"><%= roles[i].name %></option>
+		<% } %>
+	        <option id="role_other">Other</option>
+              </select>
+	    </div>
 
-	  <div class="btn-group">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" a\
-ria-haspopup="true" aria-expanded="false">
-             Choose role <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-	      <% for(var i = 0; i < roles.length; i++) {%>
-                 <li><a id="role_<%= roles[i].short_name %>" href="#"><%= roles[i].name %></a></li>
-              <% } %>
-              <li><a id="role_other" href="#">Other</a></li>
-            </ul>
-          </div>
+	    <button id="role_save_button" type="button" class="btn btn-primary">Save</button>
+	  </form>
+
 	</div>
-      </div>
+      </div>-->
+
+
+      <% if (userRole == null) { %>
+      <% } %>
 
         <!-- LOCAL INFORMATION -->
         <div class="col-sm-6">
@@ -104,9 +111,15 @@ ria-haspopup="true" aria-expanded="false">
   <script src="https://code.jquery.com/jquery.js"></script>
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
   <script type="text/javascript">
-    $(document).ready(function() {
-    $('#user_nav').addClass("active");
-    });
+    function htmlDecode(input){
+    var e = document.createElement('div');
+    e.innerHTML = input;
+    return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+    var user = JSON.parse(htmlDecode("<%= JSON.stringify(user) %>"));
+    var userRole = JSON.parse(htmlDecode("<%= JSON.stringify(userRole) %>"));
+    var roles = JSON.parse(htmlDecode("<%= JSON.stringify(roles) %>"));
   </script>
+  <script type="text/javascript" src="/js/profile.js"></script>
 </body>
 </html>

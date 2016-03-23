@@ -33,10 +33,13 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
+var user = require('./app/models/user');
 var role = require('./app/models/role');
+var userRole = require('./app/models/userrole');
+var idea = require('./app/models/idea');
 
 // routes ======================================================================
-require('./app/routes.js')(app, passport, role); // load our routes and pass in our app and fully configured passport
+require('./app/routes.js')(app, passport, user, role, userRole, idea); // load our routes and pass in our app and fully configured passport
 
 //var routes = require('./routes/index');
 //var idea  = require('./routes/idea');

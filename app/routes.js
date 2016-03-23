@@ -1,4 +1,4 @@
-module.exports = function(app, passport, Role) {
+module.exports = function(app, passport, User, Role, UserRole, Idea) {
 
     // =====================================
     // HOME PAGE (with login links) ========
@@ -14,7 +14,7 @@ module.exports = function(app, passport, Role) {
     // Add idea, Volunteer, and About page
     //
     
-    app.get('/idea', function(req, res) {
+    app.get('/idea', isLoggedIn, function(req, res) {
 	Role.find({}, function(err, roles) {
 	    res.render('idea.ejs', {
 		user: req.user ? req.user : undefined,
@@ -23,14 +23,59 @@ module.exports = function(app, passport, Role) {
             });
 	});
     });
+
+    app.post('/idea', function(req, res, next) {
+	var newIdea = new Idea();
+
+	//console.log(req.body);
+
+	newIdea.title = req.body.title;
+	newIdea.description = req.body.description;
+	newIdea.status = req.body.status;
+	newIdea.site = req.body.site;
+
+	User.findById(req.body.user_id, function (err, user) {
+	    if (err) {
+		console.log(err);
+		return next(err);
+	    }
+	    //console.log(user);
+
+	    newIdea.creator = user;
+
+	    //console.log(req.body['neededRoles[]']);
+
+	    Role.find({
+		'_id': { $in: req.body['neededRoles[]'] }
+	    }, function (err, roles) {
+		if (err) {
+                    console.log(err);
+                    return next(err);
+		}
+		console.log(roles);
+
+		newIdea.neededRoles = roles;
+
+		newIdea.save(function(err) {
+		  if (err)
+		  return next(err);
+		  
+		  res.json(201, newIdea);
+		  });
+	    });
+	});
+    });
     
-    app.get('/volunteer', function(req, res) {
+    app.get('/volunteer', isLoggedIn, function(req, res) {
 	Role.find({}, function(err, roles) {
-            res.render('volunteer.ejs', {
-		user: req.user ? req.user : undefined,
-		title: 'Scratch Up Catalog',
-		roles: roles
-            });
+	    Idea.find({}, function(err, ideas) {
+		res.render('volunteer.ejs', {
+		    user: req.user ? req.user : undefined,
+		    title: 'Scratch Up Catalog',
+		    roles: roles,
+		    ideas: ideas
+		});
+	    });
 	});
     });
 
@@ -61,9 +106,12 @@ module.exports = function(app, passport, Role) {
     // show the signup form
     app.get('/signup', function(req, res) {
 
-        // render the page and pass in any flash data if it exists
-        res.render('signup.ejs', { message: req.flash('signupMessage'),
-				 title: 'Scratch Up Catalog'});
+	Role.find({}, function(err, roles) {
+            // render the page and pass in any flash data if it exists
+            res.render('signup.ejs', { message: req.flash('signupMessage'),
+				       title: 'Scratch Up Catalog',
+				       roles: roles});
+	});
     });
 
     // process the signup form
@@ -76,11 +124,15 @@ module.exports = function(app, passport, Role) {
     // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/profile', isLoggedIn, function(req, res) {
         Role.find({}, function(err, roles) {
-	    res.render('profile.ejs', {
-		user : req.user,// get the user out of session and pass to template
-		title: 'Scratch Up Catalog',
-		roles: roles
-            });
+	    UserRole.findOne({"user._id": req.user._id}, function(err, userRole) {
+		console.log("userRole: " + userRole);
+		res.render('profile.ejs', {
+		    user : req.user,// get the user out of session and pass to template
+		    title: 'Scratch Up Catalog',
+		    roles: roles,
+		    userRole: userRole
+		});
+	    });
 	});
     });
 
@@ -223,5 +275,5 @@ function isLoggedIn(req, res, next) {
         return next();
 
     // if they aren't redirect them to the home page
-    res.redirect('/');
+    res.redirect('/login');
 }

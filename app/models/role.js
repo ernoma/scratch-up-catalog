@@ -17,8 +17,8 @@ Role.find({}, function(err, roles) {
     // if no roles add them
     //
     if (roles.length == 0) {
-	var roleNames = ['Software Developer / Designer', 'UI / UX / Graphic Designer', 'Sysadmin', 'Visual Artist', 'Musician', 'Marketing', 'Leading / Management'];
-	var shortNames = ['developer', 'designer', 'admin', 'artist', 'musician', 'marketer', 'manager'];
+	var roleNames = ['Software Developer / Designer', 'UI / UX / Graphic Designer', 'Hardware / Electronics', 'Sysadmin', 'Visual Artist', 'Musician', 'Marketing', 'Leading / Management', 'Other'];
+	var shortNames = ['developer', 'hardware', 'designer', 'admin', 'artist', 'musician', 'marketer', 'manager', 'other'];
 	createInitialRoles(roleNames, shortNames);
     }
 });

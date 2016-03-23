@@ -13,13 +13,13 @@ var IdeaSchema = mongoose.Schema({
         ref: 'User'
     },
     neededRoles: [
-	role: {
+	{
 	    type: mongoose.Schema.Types.ObjectId,
             ref: 'Role'
 	}
-    ]
+    ],
     participants: [
-	user: {
+	{
 	    type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
 	}

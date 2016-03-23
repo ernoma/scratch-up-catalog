@@ -25,11 +25,11 @@
 	      <span id="roles" class="help-block">Select roles for wanted volunteers</span>
 	      <% for(var i = 0; i < roles.length; i++) {%>
 		 <label class="checkbox">
-		   <input type="checkbox" value="" id="role_<%= roles[i].short_name %>">
+		   <input type="checkbox" value="<%= roles[i].id %>" id="role_<%= roles[i].short_name %>">
 		   <%= roles[i].name %>
 		 </label>
 	      <% } %>
-	      <div class="row">
+<!--	      <div class="row">
 		<div class="col-md-1">
 		  <label class="checkbox">
                     <input type="checkbox" value="" id="role_other">
@@ -40,37 +40,33 @@
 		  <input type="text" class="form-control" id="role_other_description" placeholder="Describe..." disabled>
 		</div>
 	      </div>
-	    </div>
-	    <div class="form-group">
+	    </div>-->
+	    <!--<div class="form-group">
 	      <label for="photo">Photo</label>
 	      <span class="help-block">For advertisement</span>
 	      <input type="file" id="photo" accept="image/*">
-	    </div>
+	    </div>-->
 	    <div class="form-group">
 	      <label for="status">Status</label>
 	      <span class="help-block">Current status of the idea</span>
-	      <div class="btn-group">
-		<button id="status" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		  Cat gold - Just idea <span class="caret"></span>
-		</button>
-		<ul class="dropdown-menu">
-		  <li><a href="#">Gold - Under implementation</a></li>
-		  <li><a href="#">Platinium - Implemented</a></li>
-		  <li><a href="#">Diamond - Happy customers</a></li>
-		</ul>
-	      </div>
+	      <select id="status" name="status" class="form-control">
+		<option>Cat gold - Just idea</option>
+		<option>Gold - Under implementation</option>
+		<option>Platinium - Implemented</option>
+		<option>Diamond - Happy customers</option>
+	      </select>
 	    </div>
             <div class="form-group">
               <label for="site">Site</label>
 	      <span class="help-block">You may include if there is already a web page or site for the idea</span>
-              <input type="text" class="form-control" id="title" placeholder="http://yourideasite.com/">
+              <input type="text" class="form-control" id="site" placeholder="http://yourideasite.com/">
             </div>
 	    
 	    <div class="row">
 	      <div class="col-md-1">
-	      	<button type="submit" class="btn btn-primary">Submit</button>
+	      	<button id="submit_button" type="button" class="btn btn-primary">Submit</button>
 	      </div>
-	      <div class="col-md-11">
+	      <!--<div class="col-md-11">
 		<div class="checkbox">
 		  <label>
 		    <% if (typeof user == "undefined") { %>
@@ -80,7 +76,7 @@
 		    <% } %>
 		  </label>
 		</div>
-	      </div>
+	      </div>-->
 	    </div>
 	  </form>
 	</div><!-- /panel-body -->
@@ -91,6 +87,15 @@
 
   <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+  <script type="text/javascript">
+    function htmlDecode(input){
+    var e = document.createElement('div');
+    e.innerHTML = input;
+    return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+    var user = JSON.parse(htmlDecode("<%= JSON.stringify(user) %>"));
+    var roles = JSON.parse(htmlDecode("<%= JSON.stringify(roles) %>"));
+  </script>
   <script type="text/javascript" src="/js/idea.js"></script>
 </body>
 </html>

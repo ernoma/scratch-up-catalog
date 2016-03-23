@@ -13,21 +13,47 @@
     <div class="panel panel-default">
         <div class="panel-body">
 	  
-	  <div class="btn-group">
-	    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	      Choose interesting role <span class="caret"></span>
-	    </button>
-	    <ul class="dropdown-menu">
-	      <% for(var i = 0; i < roles.length; i++) {%>
-		 <li><a id="role_<%= roles[i].short_name %>" href="#"><%= roles[i].name %></a></li>
-	      <% } %>
-	      <li><a id="role_other" href="#">Other</a></li>
-	    </ul>
-	  </div>
+	  <form>
+            <div class="form-group">
+              <label for="roleSelect">
+                Filter ideas by the role best matching your skills:
+              </label>
+              <select id="role_select" name="roleSelect" class="form-control">
+                <option>Choose role</option>
+                <% for(var i = 0; i < roles.length; i++) {%>
+                   <option id="role_<%= roles[i].short_name %>"><%= roles[i].name %></option>
+                <% } %>
+                <option id="role_other">Other</option>
+              </select>
+            </div>
+
+          </form>
 	</div><!-- /panel-body -->
     </div><!-- /panel -->
     <div class="panel panel-default" id="role_contents">
       <div class="panel-body">
+
+	<h2>Ideas</h2>
+
+	<ul class="idea_list">
+	  <% for(var i = 0; i < ideas.length; i++) {%>
+	     <li class="idea_list_item">
+	       <h3><%= ideas[i].title %></h3>
+	       <p><%= ideas[i].description %></p>
+	       <p>Wanted volunteers to roles:</p>
+	       <ul>
+		 <% for(var j = 0; j < ideas[i].neededRoles.length; j++) {%>
+		    <% for(var k = 0; k < roles.length; k++) {%>
+		       <!--<li><%= ideas[i].neededRoles[j] %> vs. <%= roles[k]._id %>-->
+		       <% if(roles[k]._id == ideas[i].neededRoles[j]) {%> 
+			  <li><%= roles[k].name %>
+			    <%= ideas[i].neededRoles[j] %>
+			    <%= roles[k]._id %>
+		       <% } %>
+                    <% } %>
+		 <% } %>
+	       </ul>
+	  <% } %>
 	<p>Relevant content for the selected role comes here</p>
       </div><!-- /panel-body -->
     </div><!-- /panel -->

@@ -10,3 +10,17 @@ a {
 .checkbox {
     font-weight: normal;
 }
+
+.idea_list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.idea_list_item {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px;
+}
