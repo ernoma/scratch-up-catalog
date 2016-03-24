@@ -19,9 +19,9 @@
                 Filter ideas by the role best matching your skills:
               </label>
               <select id="role_select" name="roleSelect" class="form-control">
-                <option>Choose role</option>
+                <option>All roles</option>
                 <% for(var i = 0; i < roles.length; i++) {%>
-                   <option id="role_<%= roles[i].short_name %>"><%= roles[i].name %></option>
+                   <option id="role_<%= roles[i]._id %>"><%= roles[i].name %></option>
                 <% } %>
               </select>
             </div>
