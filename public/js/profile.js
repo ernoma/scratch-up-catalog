@@ -7,11 +7,12 @@ $(document).ready(function() {
     console.log(roles);
 });
 
-$( "#role_select" ).on('change', function() {
-    console.log(this.value);
+$( "#user_more_info_site_button" ).on('click', function() {
+    console.log("Add site button pressed");
+
 });
 
-$( "#role_save_button" ).on('click', function() {
+$( "#profile_save_button" ).on('click', function() {
     console.log("Save pressed");
     
 });

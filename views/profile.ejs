@@ -7,102 +7,51 @@
 <div class="container">
 
     <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Profile Page</h1>
-        <!--<a href="/logout" class="btn btn-default btn-sm">Logout</a>-->
+        <h1><span class="fa fa-anchor"></span> Your Public Profile</h1>
     </div>
 
-<!--    <div class="row">
-
-      <div class="col-sm-12">
-	<div class="well">
-	  <form>
-	    <div class="form-group">
-	      <label for="roleSelect">
-		Choose the role best matching your skills:
-	      </label>
-	      <select id="role_select" name="roleSelect" class="form-control">
-		<option>Choose role</option>
-		<% for(var i = 0; i < roles.length; i++) {%>
-                   <option id="role_<%= roles[i].short_name %>"><%= roles[i].name %></option>
-		<% } %>
-	        <option id="role_other">Other</option>
-              </select>
-	    </div>
-
-	    <button id="role_save_button" type="button" class="btn btn-primary">Save</button>
-	  </form>
-
-	</div>
-      </div>-->
-
+    <div class="alert alert-info" role="alert">The information you fill here will be publicly visible.</div>
 
       <% if (userRole == null) { %>
       <% } %>
 
-        <!-- LOCAL INFORMATION -->
-        <div class="col-sm-6">
-            <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
-		
-		<% if (user.local.email) { %>
-                    <p>
-                        <strong>id</strong>: <%= user._id %><br>
-                        <strong>email</strong>: <%= user.local.email %><br>
-                        <strong>password</strong>: <%= user.local.password %>
-                    </p>
+      <form>
+	<div class="form-group">
+	  <label for="userRealName">Your name:</label>
+	  <input type="text" class="form-control" id="userRealName" placeholder="Your full name">
+	</div>
 
-		    <a href="/unlink/local" class="btn btn-default">Unlink</a>
-                    <% } else { %>
-                    <a href="/connect/local" class="btn btn-default">Connect Local</a>
-                    <% } %>
-            </div>
-        </div>
+	<div class="form-group">
+	  <label for="userDescription">Tell about you to others:</label>
+	  <textarea id="userDescription" class="form-control" rows="3" placeholder="Skills, experience, interests, ..."></textarea>
+	</div>
 
-	<!-- FACEBOOK INFORMATION -->
-        <div class="col-sm-6">
-            <div class="well">
-                <h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
-		
-		<% if (user.facebook.token) { %>
-                    <p>
-                        <strong>id</strong>: <%= user.facebook.id %><br>
-                        <strong>token</strong>: <%= user.facebook.token %><br>
-                        <strong>email</strong>: <%= user.facebook.email %><br>
-                        <strong>name</strong>: <%= user.facebook.name %>
-                    </p>
+	<div class="form-group">
+          <label for="userDescription">Your skills:</label>
+	  
+	  List skills from db and allow user to choose: undefined, no skills, average, expert 
+	  
+	</div>
 
-		    <a href="/unlink/facebook" class="btn btn-primary">Unlink</a>
-                    <% } else { %>
-                    <a href="/connect/facebook" class="btn btn-primary">Connect Facebook</a>
-                    <% } %>
-            </div>
-        </div>
+	<p>Sites where people can find more information of you (for example, personal website, LinkedIn profile page, ...):</p>
 
-    </div>
-    
-    <div class="row">
+	<ul id="more_info_site_list">
+	<li>None yet
+	</ul>
 
-      <!-- GOOGLE INFORMATION -->
-        <div class="col-sm-6">
-            <div class="well">
-                <h3 class="text-danger"><span class="fa fa-google-plus"></span> Google</h3>
+	<p><button id="user_more_info_site_button" type="button" class="btn btn-info">Add site</button></p>
 
-		<% if (user.google.token) { %>
-                    <p>
-                        <strong>id</strong>: <%= user.google.id %><br>
-                        <strong>token</strong>: <%= user.google.token %><br>
-                        <strong>email</strong>: <%= user.google.email %><br>
-                        <strong>name</strong>: <%= user.google.name %>
-                    </p>
+	<p>
+	<button id="profile_save_button" type="button" class="btn btn-primary disabled">Save changes</button></p>
+      </form>
 
-		    <a href="/unlink/google" class="btn btn-danger">Unlink</a>
-                    <% } else { %>
-                    <a href="/connect/google" class="btn btn-danger">Connect Google</a>
-                    <% } %>
-            </div>
-        </div>
-      
-    </div>
+    <hr>
+
+    <p>List of ideas you have added:</p>
+
+    <ul id="idea_list">
+    <li>None yet
+    </ul>
 
     <hr>
     <% include footer %>
