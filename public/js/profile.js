@@ -87,7 +87,7 @@ $( "#profile_save_button" ).on('click', function() {
 	if (this.type != 'button') {
 	    var idParts = this.id.split('_');
 	    if (idParts[0] == 'skill' && $(this).val() != "") {
-		skills.push($(this).val());
+		skills.push({name: $(this).val(), level: -1 });
 	    }
 	    else if (idParts[0] == 'site' && $(this).val() != "") {
 		//var key = idParts[1] + idParts[2];
@@ -101,7 +101,7 @@ $( "#profile_save_button" ).on('click', function() {
 
     var sites = [];
     for (var i = 0; i < siteValues.length / 2; i++) {
-	sites.push({title: "", url: ""});
+	sites.push({title: "", siteURL: ""});
     }
     
     for (var i = 0; i < siteValues.length; i++) {
@@ -109,13 +109,14 @@ $( "#profile_save_button" ).on('click', function() {
 	    sites[siteValues[i].index].title = siteValues[i].value;
 	}
 	else {
-	    sites[siteValues[i].index].url = siteValues[i].value;
+	    sites[siteValues[i].index].siteURL = siteValues[i].value;
 	}
     }
 
     console.log(sites);
 
     var profileInfo = {
+	user_id: user._id,
 	name: $('#userRealName').val() != "" ? $('#userRealName').val() : null,
 	description: $('#userDescription').val() != "" ? $('#userDescription').val() : null,
 	skills: skills,
@@ -124,7 +125,13 @@ $( "#profile_save_button" ).on('click', function() {
 
     // Send data to server
 
-    $.post('/profile', profileInfo, function(data) {
+    $.ajax({
+	url: '/profile',
+	type: 'POST',
+	data: JSON.stringify(profileInfo),
+	contentType: 'application/json; charset=utf-8',
+	dataType: 'json'
+    }).done(function(data) {
 	console.log("posted");
         console.log(data);
     });

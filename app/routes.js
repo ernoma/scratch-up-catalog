@@ -293,6 +293,27 @@ module.exports = function(app, passport, User, Role, UserRole, Idea) {
     
     app.post('/profile', function(req, res, next) {
 	console.log(req.body);
+	
+	User.findById(req.body.user_id, function (err, user) {
+            if (err) {
+                console.log(err);
+                return next(err);
+            }
+
+	    console.log(user);
+
+	    user.name = req.body.name;
+	    user.description = req.body.description;
+	    user.skills = req.body.skills;
+	    user.sites = req.body.sites;
+
+	    user.save(function(err) {
+                if (err)
+                    return next(err);
+
+                res.json(201, user);
+            });
+	});
     });
 
 };
