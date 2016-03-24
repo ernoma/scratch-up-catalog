@@ -23,48 +23,6 @@ module.exports = function(app, passport, User, Role, UserRole, Idea) {
             });
 	});
     });
-
-    app.post('/idea', function(req, res, next) {
-	var newIdea = new Idea();
-
-	//console.log(req.body);
-
-	newIdea.title = req.body.title;
-	newIdea.description = req.body.description;
-	newIdea.status = req.body.status;
-	newIdea.site = req.body.site;
-
-	User.findById(req.body.user_id, function (err, user) {
-	    if (err) {
-		console.log(err);
-		return next(err);
-	    }
-	    //console.log(user);
-
-	    newIdea.creator = user;
-
-	    //console.log(req.body['neededRoles[]']);
-
-	    Role.find({
-		'_id': { $in: req.body['neededRoles[]'] }
-	    }, function (err, roles) {
-		if (err) {
-                    console.log(err);
-                    return next(err);
-		}
-		console.log(roles);
-
-		newIdea.neededRoles = roles;
-
-		newIdea.save(function(err) {
-		  if (err)
-		  return next(err);
-		  
-		  res.json(201, newIdea);
-		  });
-	    });
-	});
-    });
     
     app.get('/volunteer', isLoggedIn, function(req, res) {
 	Role.find({}, function(err, roles) {
@@ -124,14 +82,10 @@ module.exports = function(app, passport, User, Role, UserRole, Idea) {
     // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/profile', isLoggedIn, function(req, res) {
         Role.find({}, function(err, roles) {
-	    UserRole.findOne({"user._id": req.user._id}, function(err, userRole) {
-		console.log("userRole: " + userRole);
-		res.render('profile.ejs', {
-		    user : req.user,// get the user out of session and pass to template
-		    title: 'Scratch Up Catalog',
-		    roles: roles,
-		    userRole: userRole
-		});
+	    res.render('profile.ejs', {
+		user : req.user,// get the user out of session and pass to template
+		title: 'Scratch Up Catalog',
+		roles: roles
 	    });
 	});
     });
@@ -291,7 +245,55 @@ module.exports = function(app, passport, User, Role, UserRole, Idea) {
             res.json(roles);
         });
     });
+
+    //
+    // Functions to post data to server
+    //
+    app.post('/idea', function(req, res, next) {
+	var newIdea = new Idea();
+
+	//console.log(req.body);
+
+	newIdea.title = req.body.title;
+	newIdea.description = req.body.description;
+	newIdea.status = req.body.status;
+	newIdea.site = req.body.site;
+
+	User.findById(req.body.user_id, function (err, user) {
+	    if (err) {
+		console.log(err);
+		return next(err);
+	    }
+	    //console.log(user);
+
+	    newIdea.creator = user;
+
+	    //console.log(req.body['neededRoles[]']);
+
+	    Role.find({
+		'_id': { $in: req.body['neededRoles[]'] }
+	    }, function (err, roles) {
+		if (err) {
+                    console.log(err);
+                    return next(err);
+		}
+		console.log(roles);
+
+		newIdea.neededRoles = roles;
+
+		newIdea.save(function(err) {
+		  if (err)
+		  return next(err);
+		  
+		  res.json(201, newIdea);
+		  });
+	    });
+	});
+    });
     
+    app.post('/profile', function(req, res, next) {
+	console.log(req.body);
+    });
 
 };
 

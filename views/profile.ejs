@@ -12,10 +12,9 @@
 
     <div class="alert alert-info" role="alert">The information you fill here will be publicly visible.</div>
 
-      <% if (userRole == null) { %>
-      <% } %>
+      <form id="profile_form">
+	<div class="profile_form_div">
 
-      <form>
 	<div class="form-group">
 	  <label for="userRealName">Your name:</label>
 	  <input type="text" class="form-control" id="userRealName" placeholder="Your full name">
@@ -23,31 +22,34 @@
 
 	<div class="form-group">
 	  <label for="userDescription">Tell about you to others:</label>
-	  <textarea id="userDescription" class="form-control" rows="3" placeholder="Skills, experience, interests, ..."></textarea>
+	  <textarea id="userDescription" class="form-control" rows="3" placeholder="Interests, experience, ..."></textarea>
 	</div>
 
-	<div class="form-group">
-          <label for="userDescription">Your skills:</label>
-	  
-	  List skills from db and allow user to choose: undefined, no skills, average, expert 
+        <p><b>Your main skills:</b></p> 
+
+	<div id="div_skills">
 	  
 	</div>
+	
+	<button id="user_profile_skill_button" type="button" class="btn btn-info">Add other skill</button>
 
-	<p>Sites where people can find more information of you (for example, personal website, LinkedIn profile page, ...):</p>
+	<p><b>Sites where people can find more information of you (for example, personal website, LinkedIn profile page, ...):</b></p>
+	
+	<div id="div_sites">
+	</div>
 
-	<ul id="more_info_site_list">
-	<li>None yet
-	</ul>
+	<button id="user_profile_site_button" type="button" class="btn btn-info">Add other site</button>
 
-	<p><button id="user_more_info_site_button" type="button" class="btn btn-info">Add site</button></p>
+	</div> <!-- class="profile_form_div" -->
 
-	<p>
-	<button id="profile_save_button" type="button" class="btn btn-primary disabled">Save changes</button></p>
+	<div class="profile_buttons_div">
+	  <button id="profile_save_button" type="button" class="btn btn-primary">Save changes</button>
+	</div>
       </form>
 
     <hr>
 
-    <p>List of ideas you have added:</p>
+    <p>Ideas you have added:</p>
 
     <ul id="idea_list">
     <li>None yet
@@ -66,8 +68,6 @@
     return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
     }
     var user = JSON.parse(htmlDecode("<%= JSON.stringify(user) %>"));
-    var userRole = JSON.parse(htmlDecode("<%= JSON.stringify(userRole) %>"));
-    var roles = JSON.parse(htmlDecode("<%= JSON.stringify(roles) %>"));
   </script>
   <script type="text/javascript" src="/js/profile.js"></script>
 </body>

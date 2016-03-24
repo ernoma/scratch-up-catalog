@@ -1,7 +1,18 @@
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
 
+var SiteSchema = new mongoose.Schema({
+    title: String,
+    siteURL: String
+});
+
+var SkillSchema = new mongoose.Schema({
+    name: String,
+    level: Number
+});
+
 var userSchema = mongoose.Schema({
+    name: String,
     description: String,
     local            : {
         email        : String,
@@ -18,8 +29,9 @@ var userSchema = mongoose.Schema({
         token        : String,
         email        : String,
         name         : String
-    }
-
+    },
+    sites: [SiteSchema],
+    skills: [SkillSchema]
 });
 
 userSchema.methods.generateHash = function(password) {

@@ -11,6 +11,8 @@ a {
     font-weight: normal;
 }
 
+/* Volunteer page */
+
 .idea_list {
     margin: 0;
     padding: 0;
@@ -23,4 +25,36 @@ a {
     border-radius: 5px;
     padding: 20px;
     margin: 20px;
+}
+ 
+/* Profile page */
+
+.profile_form_div {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #aaa;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 0px;
+}
+
+.profile_div_form_list_item {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #aaa;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px;
+}
+
+#user_profile_skill_button {
+    margin-bottom: 20px;
+}
+
+.profile_list_item_info {
+    padding-bottom: 5px;
+}
+
+.profile_buttons_div {
+    margin-top: 5px;
 }
