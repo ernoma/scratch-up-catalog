@@ -6,10 +6,15 @@
   
 <div class="container">
 
+  <ul class="nav nav-tabs" id="tab_profile_nav">
+    <li role="presentation" class="active"><a href="#" id="a_tab_profile">Your Profile</a></li>
+    <li role="presentation"><a href="#" id="a_tab_ideas">Your Ideas</a></li>
+  </ul>
+  <div id="profile_tab_profile_div">
     <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Your Public Profile</h1>
+        <h2><span class="fa fa-anchor"></span> Your Profile</h2>
     </div>
-
+    
     <div class="alert alert-info" role="alert">The information you fill here will be publicly visible.</div>
 
       <form id="profile_form">
@@ -47,13 +52,17 @@
 	</div>
       </form>
 
-    <hr>
+  </div> <!-- tab_profile_div -->
+  <div id="profile_tab_ideas_div">
 
-    <p>Ideas you have added:</p>
+    <div class="page-header text-center">
+      <h2>Your Ideas</h2>
+    </div>
 
-    <ul id="idea_list">
-    <li>None yet
+    <ul id="idea_list" class="idea_list">
+      <li>None yet
     </ul>
+  </div>
 
     <hr>
     <% include footer %>
@@ -61,6 +70,7 @@
   <!-- /container -->
   <script src="https://code.jquery.com/jquery.js"></script>
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/js/vendor/moment-with-locales.min.js"></script>
   <script type="text/javascript">
     function htmlDecode(input){
     var e = document.createElement('div');

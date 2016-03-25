@@ -6,8 +6,10 @@
 
   <% include navbar %>
   <div class="container">
-    
-    <h1>Add Idea</h1>
+
+    <div class="page-header text-center">
+      <h2>Add Idea</h2>
+    </div>
 
     <div class="panel panel-default">
         <div class="panel-body">
@@ -61,7 +63,13 @@
 	      <span class="help-block">You may include if there is already a web page or site for the idea</span>
               <input type="text" class="form-control" id="site" placeholder="http://yourideasite.com/">
             </div>
+	    <div class="form-group">
+              <label for="dev_site">Development site</label>
+              <span class="help-block">You may include if there is already, for example, a GitHub project page</span>
+              <input type="text" class="form-control" id="dev_site" placeholder="http://githobby.com/your/project">
+            </div>
 	    
+
 	    <div class="row">
 	      <div class="col-md-1">
 	      	<button id="submit_button" type="button" class="btn btn-primary">Submit</button>
@@ -86,7 +94,6 @@
   <% include footer %>
 
   <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
   <script type="text/javascript">
     function htmlDecode(input){
     var e = document.createElement('div');

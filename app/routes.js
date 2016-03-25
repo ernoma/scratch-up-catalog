@@ -1,5 +1,20 @@
 module.exports = function(app, passport, User, Role, UserRole, Idea) {
 
+    //
+    // Param functions
+    //
+    app.param('ideaid', function (req, res, next, ideaid) {
+	Idea.findById(ideaid, function (err, idea) {
+            if (err) {
+                console.log(err);
+                return next(err);
+            }
+	    req.idea = idea;
+	    return next();
+	});
+    });
+
+
     // =====================================
     // HOME PAGE (with login links) ========
     // =====================================
@@ -11,7 +26,7 @@ module.exports = function(app, passport, User, Role, UserRole, Idea) {
     });
 
     //
-    // Add idea, Volunteer, and About page
+    // Idea, Volunteer, and About pages
     //
     
     app.get('/idea', isLoggedIn, function(req, res) {
@@ -23,7 +38,7 @@ module.exports = function(app, passport, User, Role, UserRole, Idea) {
             });
 	});
     });
-    
+
     app.get('/volunteer', isLoggedIn, function(req, res) {
 	Role.find({}, function(err, roles) {
 	    Idea.find({}, function(err, ideas) {
@@ -258,6 +273,7 @@ module.exports = function(app, passport, User, Role, UserRole, Idea) {
 	newIdea.description = req.body.description;
 	newIdea.status = req.body.status;
 	newIdea.site = req.body.site;
+	newIdea.developmentSite = req.body.development_site;
 
 	User.findById(req.body.user_id, function (err, user) {
 	    if (err) {
@@ -290,6 +306,27 @@ module.exports = function(app, passport, User, Role, UserRole, Idea) {
 	    });
 	});
     });
+
+    app.post('/idea/:ideaid', isLoggedIn, function(req, res, next) {
+	
+	var idea = req.idea;
+	console.log(req.body);
+
+	idea.title = req.body.title;
+	idea.description = req.body.description;
+	idea.status = req.body.status;
+	idea.site = req.body.site;
+	idea.developmentSite = req.body.developmentSite;
+	idea.neededRoles = req.body.neededRoles;
+
+	idea.save(function(err) {
+            if (err)
+                return next(err);
+	    
+            res.json(201, idea);
+        });
+    });
+
     
     app.post('/profile', function(req, res, next) {
 	//console.log(req.body);

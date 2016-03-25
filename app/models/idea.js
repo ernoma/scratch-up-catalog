@@ -6,6 +6,7 @@ var IdeaSchema = mongoose.Schema({
     photo: String,
     status: String,
     site: String,
+    developmentSite: String,
     upvotes: Number,
     uniqueURL: String,
     creator: {

@@ -29,6 +29,10 @@ a {
  
 /* Profile page */
 
+#tab_profile_nav {
+    margin-top: 20px;
+}
+
 .profile_form_div {
     border-style: solid;
     border-width: 1px;

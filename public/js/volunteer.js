@@ -36,6 +36,10 @@ function createIdeaList(roleFilter) {
 	if (ideas[i].site != "") {
 	    ideaHTML += "<p>Site: <a href='" + ideas[i].site + "'>" + ideas[i].site + "</a></p><p>";
 	}
+
+	if (ideas[i].developmentSite != undefined && ideas[i].developmentSite != "") {
+            ideaHTML += "<p>Development site: <a href='" + ideas[i].developmentSite + "'>" + ideas[i].developmentSite + "</a></p><p>";
+        }
 	
 	ideaHTML += ideas[i].description + "</p><p>Needed volunteers for roles:</p><p><ul>";
 

@@ -7,6 +7,8 @@ $(document).ready(function() {
 
     console.log(user);
 
+    $("#profile_tab_ideas_div").hide();
+
     addSiteDiv();
 
     addSkillDiv();
@@ -15,7 +17,21 @@ $(document).ready(function() {
 
     fillProfileInfo();
 
-    getUserIdeas();
+    showUserIdeas();
+});
+
+$("#tab_profile_nav a").click(function(event){
+    event.preventDefault();
+    $(this).tab('show');
+    console.log($(this)[0].id);
+    if ($(this)[0].id == "a_tab_ideas") {
+	$("#profile_tab_profile_div").hide();
+	$("#profile_tab_ideas_div").show();
+    }
+    else {
+	$("#profile_tab_ideas_div").hide();
+	$("#profile_tab_profile_div").show();
+    }
 });
 
 function fillProfileInfo() {
@@ -44,30 +60,138 @@ function fillProfileInfo() {
     }
 }
 
-function getUserIdeas() {
+function showUserIdeas() {
     $.getJSON('/ideas', function (ideas) {
 	console.log(ideas);
 
-	var userIdeas = [];
+	$.getJSON("/roles", function(roles) {
 
-	if (ideas != null) {
-	    for (var i = 0; i < ideas.length; i++) {
-		if (ideas[i].creator == user._id) {
-		    userIdeas.push(ideas[i]);
+	    var userIdeas = [];
+	    
+	    if (ideas != null) {
+		for (var i = 0; i < ideas.length; i++) {
+		    if (ideas[i].creator == user._id) {
+			userIdeas.push(ideas[i]);
+		    }
 		}
 	    }
-	}
 
-	if (userIdeas.length > 0) {
-	    var ideaListHTML = '';
+	    if (userIdeas.length > 0) {
+		$("#idea_list").empty();
 
-	    for (var i = 0; i < userIdeas.length; i++) {
-		ideaListHTML += '<li>' + userIdeas[i].title;
+		var ideaHTML = "";
+
+		for (var i = 0; i < userIdeas.length; i++) {
+		    ideaHTML += "<form><li class='idea_list_item' id='idea_"
+			+ userIdeas[i]._id + "'><div class='form-group'>Title: <input type='text' class='form-control' id='title_"
+			+ userIdeas[i]._id + "' placeholder='Title for the idea' value='" + userIdeas[i].title + "'></div>";
+
+		    ideaHTML += '<div class="form-group">Status: <select id="status_' + userIdeas[i]._id + '" name="status" class="form-control">'
+
+		    if (userIdeas[i].status == "Cat gold - Just idea") {
+			ideaHTML += '<option selected>Cat gold - Just idea</option>';
+		    }
+		    else {
+			ideaHTML += '<option>Cat gold - Just idea</option>';
+		    }
+		    if (userIdeas[i].status == "Gold - Under implementation") {
+                        ideaHTML += '<option selected>Gold - Under implementation</option>';
+                    }
+                    else {
+                        ideaHTML += '<option>Gold - Under implementation</option>';
+                    }
+		    if (userIdeas[i].status == "Platinium - Implemented") {
+                        ideaHTML += '<option selected>Platinium - Implemented</option>';
+                    }
+                    else {
+                        ideaHTML += '<option>Platinium - Implemented</option>';
+                    }
+		    if (userIdeas[i].status == "Diamond - Happy customers") {
+                        ideaHTML += '<option selected>Diamond - Happy customers</option>';
+                    }
+                    else {
+                        ideaHTML += '<option>Diamond - Happy customers</option>';
+                    }
+		    ideaHTML += '</select></div>';
+		    
+
+		    /*ideaHTML += "<p>Updated: "
+			+ moment(ideas[i].updated).format('MMMM Do YYYY') + "</p><p>Status: "
+			+ ideas[i].status + "</p>";*/
+		    
+		    ideaHTML += '<div class="form-group">Site: <input type="text" class="form-control" id="site_' + userIdeas[i]._id + '" placeholder="http://yourideasite.com/" value="' + userIdeas[i].site + '"></div>';
+		    ideaHTML += '<div class="form-group">Development site: <input type="text" class="form-control" id="dev_site_' + userIdeas[i]._id + '" placeholder="http://githobby.com/your/project" value="' + (userIdeas[i].developmentSite != undefined ? userIdeas[i].developmentSite : "") + '"></div>';
+
+		    ideaHTML += '<div class="form-group">Description: <textarea class="form-control" rows="10" id="description_' + userIdeas[i]._id + '" placeholder="Detailed description of the idea">' + userIdeas[i].description + '</textarea></div>'; 
+
+		    ideaHTML += "<div class='form-group' id='roles_div_" + userIdeas[i]._id + "'><p>Needed volunteers for roles:</p><p><ul>";
+
+		    for (var k = 0; k < roles.length; k++) {
+			var html = '<label class="checkbox"><input type="checkbox" value="' + roles[k]._id + '" id="role_' + roles[k]._id + '_' + userIdeas[i]._id + '"'
+
+			for (var j = 0; j < userIdeas[i].neededRoles.length; j++) {
+			    if (userIdeas[i].neededRoles[j] == roles[k]._id) {
+				html += " checked";
+				break;
+			    }
+			}
+			ideaHTML += html + ">" + roles[k].name + "</label>";
+		    }
+
+		    ideaHTML += "</ul></p></div>";
+
+		    ideaHTML += '<div class="btn-group" role="group" aria-label="Idea actions">'
+		    ideaHTML += "<button id='idea_save_button_" + userIdeas[i]._id + "' type='button' class='btn btn-primary'>Save Changes</button>";
+		    ideaHTML += "<button id='idea_volunteers_button_" + userIdeas[i]._id + "' type='button' class='btn btn-primary'>Find Volunteers</button>"
+		    ideaHTML += '</div></form>';
+
+		    $("#idea_list").append(ideaHTML);
+
+		    $("#idea_save_button_" + userIdeas[i]._id).on('click', function(event) {
+                         //TODO
+			console.log(this.value);
+			console.log(event.target.id);
+
+			var parts = event.target.id.split('_');
+			var id = parts[parts.length - 1];
+
+			var neededRoles = $("#roles_div_" + id + " input:checkbox:checked").map(function(){
+			    return $(this).val();
+			}).get();
+			//console.log(neededRoles);
+
+			var idea = {
+			    _id: id,
+			    title: $("#title_" + id).val(),
+			    description: $("#description_" + id).val(),
+			    status: $("#status_" + id).val(),
+			    site: $("#site_" + id).val(),
+			    developmentSite: $("#dev_site_" + id).val(),
+			    neededRoles: neededRoles
+			};
+
+			console.log(idea);
+
+			$.ajax({
+			    url: '/idea/' + id,
+			    type: 'POST',
+			    data: JSON.stringify(idea),
+			    contentType: 'application/json; charset=utf-8',
+			    dataType: 'json'
+			}).done(function(data) {
+			    console.log("posted");
+			    console.log(data);
+			});
+                    });
+
+		    $("#idea_volunteers_button_" + userIdeas[i]._id).on('click', function(event) {
+			// TODO			
+			console.log(this.value);
+                        console.log(event.target.id);
+		    });			
+		}
 	    }
-	    
-	    $("#idea_list").empty();
-	    $("#idea_list").append(ideaListHTML);
-	}
+	});
     });
 }
 
