@@ -13,8 +13,36 @@ $(document).ready(function() {
     addSkillDiv();
     addSkillDiv();
 
+    fillProfileInfo();
+
     getUserIdeas();
 });
+
+function fillProfileInfo() {
+    if (user.name != undefined) {
+	$("#userRealName").val(user.name);
+    }
+    if (user.description != undefined) {
+	$("#userDescription").val(user.description);
+    }
+    if (user.skills != undefined) {
+	while (skillCount < user.skills.length) {
+	    addSkillDiv();
+	}
+	for (var i = 0; i < user.skills.length; i++) {
+	    $("#skill_" + (i+1)).val(user.skills[i].name);
+	}
+    }
+    if (user.sites != undefined) {
+        while (siteCount < user.sites.length) {
+            addSiteDiv();
+        }
+        for (var i = 0; i < user.sites.length; i++) {
+            $("#site_title_" + (i+1)).val(user.sites[i].title);
+	    $("#site_url_" + (i+1)).val(user.sites[i].siteURL);
+        }
+    }
+}
 
 function getUserIdeas() {
     $.getJSON('/ideas', function (ideas) {

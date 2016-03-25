@@ -224,7 +224,7 @@ module.exports = function(app, passport, User, Role, UserRole, Idea) {
     //
     // Functions to get JSON data from mongoose
     //
-    app.get('/ideas', function(req, res) {
+    app.get('/ideas', function(req, res, next) {
         Idea.find({}, function(err, ideas) {
 	    if (err) {
                 console.log(err);
@@ -235,7 +235,7 @@ module.exports = function(app, passport, User, Role, UserRole, Idea) {
         });
     });
 
-    app.get('/roles', function(req, res) {
+    app.get('/roles', function(req, res, next) {
         Role.find({}, function(err, roles) {
             if (err) {
                 console.log(err);
@@ -277,7 +277,7 @@ module.exports = function(app, passport, User, Role, UserRole, Idea) {
                     console.log(err);
                     return next(err);
 		}
-		console.log(roles);
+		//console.log(roles);
 
 		newIdea.neededRoles = roles;
 
@@ -292,7 +292,7 @@ module.exports = function(app, passport, User, Role, UserRole, Idea) {
     });
     
     app.post('/profile', function(req, res, next) {
-	console.log(req.body);
+	//console.log(req.body);
 	
 	User.findById(req.body.user_id, function (err, user) {
             if (err) {
@@ -300,7 +300,7 @@ module.exports = function(app, passport, User, Role, UserRole, Idea) {
                 return next(err);
             }
 
-	    console.log(user);
+	    //console.log(user);
 
 	    user.name = req.body.name;
 	    user.description = req.body.description;
