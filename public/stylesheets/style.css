@@ -62,3 +62,19 @@ a {
 .profile_buttons_div {
     margin-top: 5px;
 }
+
+/* Talents page */
+
+.talents_list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.talents_list_item {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px;
+}

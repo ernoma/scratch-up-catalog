@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include header %>
+<body>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+  <% include navbar %>
+  <div class="container">
+
+    <div class="page-header text-center">
+      <h2>Find Talents</h2>
+    </div>
+
+    <ul id="talents_list" class="talents_list">
+      <li class="user_list_item" id="user_">
+	<h3>name</h3>
+	<p>Matched roles for your idea <b>Paras</b>:</p>
+	<ul>
+	  <li>Developer
+	</ul
+	<p>Matched roles for your idea <b>Turismo</b>:</p>
+	<ul>
+          <li>Developer
+	  <li>Guru
+        </ul>
+	<p>decscription</p>
+	<p>Main skills:</p>
+	<ul>
+	  <li>C++
+	  <li>Java
+	</ul>
+	<p>Sites:</p>
+	<ul>
+	  <li><a href="http://address.com/">title</a>
+	</ul>
+	<button>Contact talent</button>
+    </ul>
+
+  </div><!-- /container -->
+
+  <% include footer %>
+
+  <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+    function htmlDecode(input){
+    var e = document.createElement('div');
+    e.innerHTML = input;
+    return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+    var user = JSON.parse(htmlDecode("<%= JSON.stringify(user) %>"));
+  </script>
+  <script type="text/javascript" src="/js/talents.js"></script>
+</body>
+</html>

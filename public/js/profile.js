@@ -170,13 +170,20 @@ function showUserIdeas() {
 
 		    ideaHTML += '<div class="btn-group" role="group" aria-label="Idea actions">'
 		    ideaHTML += "<button id='idea_save_button_" + userIdeas[i]._id + "' type='button' class='btn btn-primary'>Save Changes</button>";
-		    ideaHTML += "<button id='idea_volunteers_button_" + userIdeas[i]._id + "' type='button' class='btn btn-primary'>Find Volunteers</button>"
+		    ideaHTML += "<a href='/talents/" + userIdeas[i]._id + "' id='idea_volunteers_button_" + userIdeas[i]._id + "' type='button' class='btn btn-primary'>Find Volunteers</a>"
 		    ideaHTML += '</div></form>';
 
 		    $("#idea_list").append(ideaHTML);
 
+		    
+		    $("#idea_volunteers_button_" + userIdeas[i]._id).on('click', function(event) {
+			// TODO	
+			console.log(this.value);
+                        console.log(event.target.id);
+		    });			
+
+
 		    $("#idea_save_button_" + userIdeas[i]._id).on('click', function(event) {
-                         //TODO
 			console.log(this.value);
 			console.log(event.target.id);
 
@@ -211,12 +218,6 @@ function showUserIdeas() {
 			    console.log(data);
 			});
                     });
-
-		    $("#idea_volunteers_button_" + userIdeas[i]._id).on('click', function(event) {
-			// TODO			
-			console.log(this.value);
-                        console.log(event.target.id);
-		    });			
 		}
 	    }
 	});

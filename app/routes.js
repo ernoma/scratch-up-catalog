@@ -26,7 +26,7 @@ module.exports = function(app, passport, User, Role, UserRole, Idea) {
     });
 
     //
-    // Idea, Volunteer, and About pages
+    // Get Idea, Volunteer, Talents and About pages
     //
     
     app.get('/idea', isLoggedIn, function(req, res) {
@@ -50,6 +50,21 @@ module.exports = function(app, passport, User, Role, UserRole, Idea) {
 		});
 	    });
 	});
+    });
+
+    app.get('/talents', isLoggedIn, function(req, res) {
+        res.render('talents.ejs', {
+            user: req.user ? req.user : undefined,
+            title: 'Scratch Up Catalog'
+        });
+    });
+
+    app.get('/talents/:ideaid', isLoggedIn, function(req, res) {
+        res.render('talents.ejs', {
+            user: req.user ? req.user : undefined,
+            title: 'Scratch Up Catalog',
+	    idea: req.idea
+        });
     });
 
     app.get('/about', function(req, res) {
@@ -261,6 +276,17 @@ module.exports = function(app, passport, User, Role, UserRole, Idea) {
         });
     });
 
+    app.get('/users', function(req, res, next) {
+        User.find({}, function(err, users) {
+            if (err) {
+                console.log(err);
+                return next(err);
+            }
+
+            res.json(users);
+        });
+    });
+
     //
     // Functions to post data to server
     //
@@ -329,7 +355,7 @@ module.exports = function(app, passport, User, Role, UserRole, Idea) {
 
     
     app.post('/profile', function(req, res, next) {
-	console.log(req.body);
+	//console.log(req.body);
 	
 	User.findById(req.body.user_id, function (err, user) {
             if (err) {
@@ -337,7 +363,7 @@ module.exports = function(app, passport, User, Role, UserRole, Idea) {
                 return next(err);
             }
 
-	    console.log(user);
+	    //console.log(user);
 
 	    user.name = req.body.name;
 	    user.available = req.body.available;
