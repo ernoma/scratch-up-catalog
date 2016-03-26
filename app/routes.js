@@ -329,7 +329,7 @@ module.exports = function(app, passport, User, Role, UserRole, Idea) {
 
     
     app.post('/profile', function(req, res, next) {
-	//console.log(req.body);
+	console.log(req.body);
 	
 	User.findById(req.body.user_id, function (err, user) {
             if (err) {
@@ -337,16 +337,20 @@ module.exports = function(app, passport, User, Role, UserRole, Idea) {
                 return next(err);
             }
 
-	    //console.log(user);
+	    console.log(user);
 
 	    user.name = req.body.name;
+	    user.available = req.body.available;
 	    user.description = req.body.description;
 	    user.skills = req.body.skills;
 	    user.sites = req.body.sites;
+	    user.interestingRoles = req.body.interestingRoles;
 
 	    user.save(function(err) {
-                if (err)
+                if (err) {
+		    console.log(err);
                     return next(err);
+		}
 
                 res.json(201, user);
             });

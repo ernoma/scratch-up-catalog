@@ -14,6 +14,7 @@ var SkillSchema = new mongoose.Schema({
 var userSchema = mongoose.Schema({
     name: String,
     description: String,
+    available: Boolean,
     local            : {
         email        : String,
         password     : String,
@@ -31,7 +32,13 @@ var userSchema = mongoose.Schema({
         name         : String
     },
     sites: [SiteSchema],
-    skills: [SkillSchema]
+    skills: [SkillSchema],
+    interestingRoles: [
+	{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Role'
+        }
+    ]
 });
 
 userSchema.methods.generateHash = function(password) {

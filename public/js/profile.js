@@ -34,7 +34,32 @@ $("#tab_profile_nav a").click(function(event){
     }
 });
 
+function showRoles() {
+    $.getJSON('/roles', function(roles) {
+	for(var i = 0; i < roles.length; i++) {
+	    var interesting = false;
+	    for (var j = 0; j < user.interestingRoles.length; j++) {
+		if (roles[i]._id == user.interestingRoles[j]) {
+		    $("#div_profile_roles").append('<label class="checkbox"><input type="checkbox" value="' + roles[i]._id + '" id="role_' + roles[i].short_name + '" checked>' + roles[i].name + '</label>');
+		    interesting = true;
+		}
+	    }
+	    if (!interesting) {
+		$("#div_profile_roles").append('<label class="checkbox"><input type="checkbox" value="' + roles[i]._id + '" id="role_' + roles[i].short_name + '">' + roles[i].name + '</label>');
+	    }
+	}
+    });
+}
+
 function fillProfileInfo() {
+    if (user.available != undefined) {
+	if (user.available == true) {
+	    $("#userAvailableYes").prop( "checked", true );
+	}
+	else {
+	    $("#userAvailableNo").prop( "checked", true );
+	}
+    }
     if (user.name != undefined) {
 	$("#userRealName").val(user.name);
     }
@@ -49,6 +74,9 @@ function fillProfileInfo() {
 	    $("#skill_" + (i+1)).val(user.skills[i].name);
 	}
     }
+
+    showRoles();
+
     if (user.sites != undefined) {
         while (siteCount < user.sites.length) {
             addSiteDiv();
@@ -228,6 +256,10 @@ $( "#profile_save_button" ).on('click', function() {
     console.log($('#userRealName').val());
     console.log($('#userDescription').val());
 
+    var availableVal = $('input[name=userAvailable]:checked').val();
+    console.log(availableVal);
+    var available = availableVal == "yes" ? true : false; 
+
     // Go through skill inputs and site inputs and add them to the profileInfo
     
     var $inputs = $('#profile_form :input');
@@ -251,6 +283,11 @@ $( "#profile_save_button" ).on('click', function() {
     console.log(skills);
     console.log(siteValues);
 
+    var interestingRoles = $("#div_profile_roles input:checkbox:checked").map(function(){
+        return $(this).val();
+    }).get();
+    console.log(interestingRoles);
+
     var sites = [];
     for (var i = 0; i < siteValues.length / 2; i++) {
 	sites.push({title: "", siteURL: ""});
@@ -269,10 +306,12 @@ $( "#profile_save_button" ).on('click', function() {
 
     var profileInfo = {
 	user_id: user._id,
+	available: available,
 	name: $('#userRealName').val() != "" ? $('#userRealName').val() : null,
 	description: $('#userDescription').val() != "" ? $('#userDescription').val() : null,
 	skills: skills,
-	sites: sites
+	sites: sites,
+	interestingRoles: interestingRoles
     }
 
     // Send data to server

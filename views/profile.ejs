@@ -21,6 +21,22 @@
 	<div class="profile_form_div">
 
 	<div class="form-group">
+	  <label for="userAvailable">I am able to volunteer currently:</label>
+	  <div class="radio">
+	    <label>
+	      <input type="radio" name="userAvailable" id="userAvailableYes" value="yes" checked>
+	      Yes
+	    </label>
+	  </div>
+	  <div class="radio">
+            <label>
+              <input type="radio" name="userAvailable" id="userAvailableNo" value="no">
+              No
+            </label>
+          </div>
+	</div>
+
+	<div class="form-group">
 	  <label for="userRealName">Your name:</label>
 	  <input type="text" class="form-control" id="userRealName" placeholder="Your full name">
 	</div>
@@ -31,18 +47,17 @@
 	</div>
 
         <p><b>Your main skills:</b></p> 
-
-	<div id="div_skills">
-	  
+	<div id="div_skills">	  
 	</div>
-	
 	<button id="user_profile_skill_button" type="button" class="btn btn-info">Add other skill</button>
 
+	<p><b>Project roles interesting to you:</b></p>
+	<div id="div_profile_roles">
+        </div>
 	<p><b>Sites where people can find more information of you (for example, personal website, LinkedIn profile page, ...):</b></p>
 	
 	<div id="div_sites">
 	</div>
-
 	<button id="user_profile_site_button" type="button" class="btn btn-info">Add other site</button>
 
 	</div> <!-- class="profile_form_div" -->

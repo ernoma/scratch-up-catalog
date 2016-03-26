@@ -106,6 +106,7 @@ module.exports = function(passport) {
 
                     newUser.local.email    = email;
                     newUser.local.password = newUser.generateHash(password);
+		    newUser.available = true;
 
                     newUser.save(function(err) {
                         if (err)
