@@ -40,12 +40,12 @@ function showRoles() {
 	    var interesting = false;
 	    for (var j = 0; j < user.interestingRoles.length; j++) {
 		if (roles[i]._id == user.interestingRoles[j]) {
-		    $("#div_profile_roles").append('<label class="checkbox"><input type="checkbox" value="' + roles[i]._id + '" id="role_' + roles[i].short_name + '" checked>' + roles[i].name + '</label>');
+		    $("#list_profile_roles").append('<label class="checkbox"><input type="checkbox" value="' + roles[i]._id + '" id="role_' + roles[i].short_name + '" checked>' + roles[i].name + '</label>');
 		    interesting = true;
 		}
 	    }
 	    if (!interesting) {
-		$("#div_profile_roles").append('<label class="checkbox"><input type="checkbox" value="' + roles[i]._id + '" id="role_' + roles[i].short_name + '">' + roles[i].name + '</label>');
+		$("#list_profile_roles").append('<label class="checkbox"><input type="checkbox" value="' + roles[i]._id + '" id="role_' + roles[i].short_name + '">' + roles[i].name + '</label>');
 	    }
 	}
     });
@@ -169,7 +169,7 @@ function showUserIdeas() {
 		    ideaHTML += "</ul></p></div>";
 
 		    ideaHTML += '<div class="btn-group" role="group" aria-label="Idea actions">'
-		    ideaHTML += "<button id='idea_save_button_" + userIdeas[i]._id + "' type='button' class='btn btn-primary'>Save Changes</button>";
+		    ideaHTML += "<a href='#' id='idea_save_button_" + userIdeas[i]._id + "' type='button' class='btn btn-primary'>Save Changes</button>";
 		    ideaHTML += "<a href='/talents/" + userIdeas[i]._id + "' id='idea_volunteers_button_" + userIdeas[i]._id + "' type='button' class='btn btn-primary'>Find Volunteers</a>"
 		    ideaHTML += '</div></form>';
 
@@ -186,6 +186,7 @@ function showUserIdeas() {
 		    $("#idea_save_button_" + userIdeas[i]._id).on('click', function(event) {
 			console.log(this.value);
 			console.log(event.target.id);
+			event.preventDefault();
 
 			var parts = event.target.id.split('_');
 			var id = parts[parts.length - 1];
@@ -232,9 +233,10 @@ function showUserIdeas() {
     });
 }
 
-$( "#user_profile_skill_button" ).on('click', function() {
+$( "#user_profile_skill_button" ).on('click', function(e) {
     console.log("Add skill button pressed");
-
+    e.preventDefault();
+    
     addSkillDiv();
 });
 
@@ -246,9 +248,9 @@ function addSkillDiv() {
     $('#div_skills').append(skillHTML);
 }
 
-$( "#user_profile_site_button" ).on('click', function() {
+$( "#user_profile_site_button" ).on('click', function(e) {
     console.log("Add site button pressed");
-
+    e.preventDefault();
     addSiteDiv();
 });
 
@@ -259,9 +261,9 @@ function addSiteDiv() {
     $('#div_sites').append(siteHTML);
 }
 
-$( "#profile_save_button" ).on('click', function() {
+$( "#profile_save_button" ).on('click', function(e) {
     console.log("Save pressed");
-
+    e.preventDefault();
     console.log($('#userRealName').val());
     console.log($('#userDescription').val());
 

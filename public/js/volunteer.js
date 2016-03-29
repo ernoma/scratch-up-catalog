@@ -66,7 +66,7 @@ function createIdeaList(roleFilter) {
 	
 	ideaHTML += "</ul></p>";
 	
-	ideaHTML += "<button id='idea_contact_button_" + ideas[i]._id + "' type='button' class='btn btn-success' data-toggle='tooltip' data-placement='top' title='Your email adress and link to your profile page will be sent to the ideator along with the info that you are interested of this idea.'>Contact ideator</button>";
+	ideaHTML += "<a href='#' id='idea_contact_button_" + ideas[i]._id + "' type='button' class='btn btn-success' data-toggle='tooltip' data-placement='top' title='Your email adress and link to your profile page will be sent to the ideator along with the info that you are interested of this idea.'>Contact ideator</a>";
 
 	ideaHTML += '<p><div id="idea_contact_alert_' + ideas[i]._id + '" class="alert alert-success alert-dismissible collapse" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button> <strong>Notification sent</strong></div></p>';
 
@@ -75,6 +75,7 @@ function createIdeaList(roleFilter) {
 	$("#idea_contact_button_" + ideas[i]._id).on('click', function(event) {
 	    console.log(this.value);
 	    console.log(event.target.id);
+	    event.preventDefault();
 
 	    var parts = event.target.id.split("_");
 

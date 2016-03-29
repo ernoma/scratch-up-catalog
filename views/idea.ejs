@@ -25,12 +25,14 @@
 	    <div class="form-group">
 	      <label for="roles">Roles</label>
 	      <span id="roles" class="help-block">Select roles for wanted volunteers</span>
+	      <ul>
 	      <% for(var i = 0; i < roles.length; i++) {%>
 		 <label class="checkbox">
 		   <input type="checkbox" value="<%= roles[i].id %>" id="role_<%= roles[i].short_name %>">
 		   <%= roles[i].name %>
 		 </label>
 	      <% } %>
+	      </ul>
 <!--	      <div class="row">
 		<div class="col-md-1">
 		  <label class="checkbox">
@@ -72,7 +74,7 @@
 
 	    <div class="row">
 	      <div class="col-md-1">
-	      	<button id="submit_button" type="button" class="btn btn-primary">Submit</button>
+	      	<a href="#" id="submit_button" class="btn btn-primary" onclick="$(this).closest('form').submit()">Submit</a>
 	      </div>
 	      <!--<div class="col-md-11">
 		<div class="checkbox">

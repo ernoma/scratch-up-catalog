@@ -150,7 +150,7 @@ function checkIdeaNeeds() {
 		userHTML += '</ul></p>';
 	    }
 
-	    userHTML += "<button id='user_contact_button_" + userID + "' type='button' class='btn btn-success' data-toggle='tooltip' data-placement='top' title='Your email adress and link to your profile page will be sent to the talent along with the info of your ideas that match talent roles.'>Contact talent</button>";
+	    userHTML += "<a href='#' id='user_contact_button_" + userID + "' class='btn btn-success' data-toggle='tooltip' data-placement='top' title='Your email adress and link to your profile page will be sent to the talent along with the info of your ideas that match talent roles.'>Contact talent</a>";
 
 	    userHTML += '<p><div id="user_contact_alert_' + userID + '" class="alert alert-success alert-dismissible collapse" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button> <strong>Notification sent</strong></div></p>';
 
@@ -159,6 +159,7 @@ function checkIdeaNeeds() {
 	    $("#user_contact_button_" + userID).on('click', function(event) {
 		console.log(this.value);
 		console.log(event.target.id);
+		event.preventDefault();
 		
 		var parts = event.target.id.split("_");
 		
