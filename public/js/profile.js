@@ -7,7 +7,7 @@ $(document).ready(function() {
 
     console.log(user);
 
-    $("#profile_tab_ideas_div").hide();
+    //$("#profile_tab_ideas_div").hide();
 
     addSiteDiv();
 
@@ -219,6 +219,14 @@ function showUserIdeas() {
 			});
                     });
 		}
+	    }
+
+	    if (window.location.hash == "#ideas") {
+		//console.log("ideas");
+		$('html, body').animate({
+		    scrollTop: ($("#ideas").offset().top - 50)
+		}, 50);
+		event.preventDefault();
 	    }
 	});
     });

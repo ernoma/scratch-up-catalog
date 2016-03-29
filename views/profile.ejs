@@ -6,11 +6,13 @@
   
 <div class="container">
 
-  <ul class="nav nav-tabs" id="tab_profile_nav">
+  <!--<ul class="nav nav-tabs" id="tab_profile_nav">
     <li role="presentation" class="active"><a href="#" id="a_tab_profile">Your Profile</a></li>
     <li role="presentation"><a href="#" id="a_tab_ideas">Your Ideas</a></li>
-  </ul>
-  <div id="profile_tab_profile_div">
+  </ul>-->
+
+  <section id="profile">
+  <div id="profile_tab_profile_div" class="container">
     <div class="page-header text-center">
         <h2><span class="fa fa-anchor"></span> Your Profile</h2>
     </div>
@@ -68,8 +70,13 @@
       </form>
 
   </div> <!-- tab_profile_div -->
-  <div id="profile_tab_ideas_div">
+  </section>
 
+  <hr>
+
+  <section id="ideas">
+  
+  <div id="profile_tab_ideas_div" class="container">
     <div class="page-header text-center">
       <h2>Your Ideas</h2>
     </div>
@@ -78,14 +85,20 @@
       <li>None yet
     </ul>
   </div>
+  </section>
 
-    <hr>
     <% include footer %>
   </div>
   <!-- /container -->
-  <script src="https://code.jquery.com/jquery.js"></script>
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="/js/vendor/moment-with-locales.min.js"></script>
+  <script src="/vendor/js/jquery.min.js"></script>
+  <script src="/vendor/js/bootstrap.min.js"></script>
+  <script src="/vendor/js/jquery.easing.min.js"></script>
+  <script src="/vendor/js/jquery.fittext.js"></script>
+  <script src="/vendor/js/wow.min.js"></script>
+<!-- Custom Theme JavaScript -->
+  <script src="/vendor/js/creative.js"></script>
+
+  <script type="text/javascript" src="/vendor/js/moment-with-locales.min.js"></script>
   <script type="text/javascript">
     function htmlDecode(input){
     var e = document.createElement('div');
@@ -95,5 +108,5 @@
     var user = JSON.parse(htmlDecode("<%= JSON.stringify(user) %>"));
   </script>
   <script type="text/javascript" src="/js/profile.js"></script>
-</body>
+  </body>
 </html>
