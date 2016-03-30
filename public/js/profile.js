@@ -213,10 +213,10 @@ function showUserIdeas() {
 		}, 50);
 		event.preventDefault();
 	    }
-	    else if (window.location.hash == "#messages") {
-                //console.log("ideas");
+	    else if (window.location.hash == "#social") {
+                //console.log("social");
                 $('html, body').animate({
-                    scrollTop: ($("#messages").offset().top - 50)
+                    scrollTop: ($("#social").offset().top - 50)
                 }, 50);
                 event.preventDefault();
             }
