@@ -107,9 +107,9 @@ function showUserIdeas() {
 	    if (userIdeas.length > 0) {
 		$("#idea_list").empty();
 
-		var ideaHTML = "";
-
 		for (var i = 0; i < userIdeas.length; i++) {
+		    var ideaHTML = "";
+
 		    ideaHTML += "<form><li class='idea_list_item' id='idea_"
 			+ userIdeas[i]._id + "'><div class='form-group'>Title: <input type='text' class='form-control' id='title_"
 			+ userIdeas[i]._id + "' placeholder='Title for the idea' value='" + userIdeas[i].title + "'></div>";
