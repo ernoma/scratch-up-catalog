@@ -11,6 +11,20 @@ var SkillSchema = new mongoose.Schema({
     level: Number
 });
 
+var MessageSchema = new  mongoose.Schema({
+    title: String,
+    message: String,
+    sender: {
+	type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    receiver: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    created: { type: Date, default: Date.now }
+});
+
 var userSchema = mongoose.Schema({
     name: String,
     description: String,
@@ -38,7 +52,8 @@ var userSchema = mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Role'
         }
-    ]
+    ],
+    messages: [MessageSchema]
 });
 
 userSchema.methods.generateHash = function(password) {

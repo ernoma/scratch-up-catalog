@@ -28,11 +28,11 @@
                     <li id="signup"><a href="/signup"><span class="fa fa-user"></span> Signup</a></li>
                     <% } else { %>
                     <li id="user_nav" class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" ar\
-ia-expanded="false"><span class="fa fa-user"></span> <%= user.local.email %> <span class="caret"></span></a>
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user"></span> <%= user.local.email %> <span class="caret"></span></a>
                       <ul class="dropdown-menu">
                         <li><a class="page-scroll" href="/profile#profile">View Your Profile</a></li>
 			<li><a class="page-scroll" href="/profile#ideas">View Your Ideas</a></li>
+			<!--<li><a class="page-scroll" href="/profile#messages">View Your Messages</a></li>-->
                         <li role="separator" class="divider"></li>
                         <li><a href="/logout">Logout</a></li>
                       </ul>

@@ -7,8 +7,6 @@ $(document).ready(function() {
 
     console.log(user);
 
-    //$("#profile_tab_ideas_div").hide();
-
     addSiteDiv();
 
     addSkillDiv();
@@ -18,20 +16,6 @@ $(document).ready(function() {
     fillProfileInfo();
 
     showUserIdeas();
-});
-
-$("#tab_profile_nav a").click(function(event){
-    event.preventDefault();
-    $(this).tab('show');
-    console.log($(this)[0].id);
-    if ($(this)[0].id == "a_tab_ideas") {
-	$("#profile_tab_profile_div").hide();
-	$("#profile_tab_ideas_div").show();
-    }
-    else {
-	$("#profile_tab_ideas_div").hide();
-	$("#profile_tab_profile_div").show();
-    }
 });
 
 function showRoles() {
@@ -229,6 +213,13 @@ function showUserIdeas() {
 		}, 50);
 		event.preventDefault();
 	    }
+	    else if (window.location.hash == "#messages") {
+                //console.log("ideas");
+                $('html, body').animate({
+                    scrollTop: ($("#messages").offset().top - 50)
+                }, 50);
+                event.preventDefault();
+            }
 	});
     });
 }

@@ -162,7 +162,7 @@ function checkIdeaNeeds() {
 		event.preventDefault();
 		
 		var parts = event.target.id.split("_");
-		
+		sendMessage(match);
 		$("#user_contact_alert_" + parts[parts.length-1]).show();
             });
 	});
@@ -241,4 +241,34 @@ function checkIdeaNeeds() {
     }
 
     $('[data-toggle="tooltip"]').tooltip(); // initialize tooltips
+}
+
+function sendMessage(match) {
+    console.log("sendMessage");
+    console.log(match);
+
+    var senderEmail = null;
+    if (user.local != undefined) {
+	senderEmail = user.local.email;
+    }
+    else if (user.facebook != undefined) {
+	senderEmail = user.facebook.email;
+    }
+    else {
+	senderEmail = user.google.email;
+    }
+
+    var ideas = {};
+    for (var i = 0; i < match.matches.length; i++) {
+	if (ideas[match.matches[i].idea._id] == undefined) {
+	    ideas[match.matches[i].idea._id] = match.matches[i].idea;
+	}
+    }
+
+    var message = {
+	title: "User " + ((user.name != null && user.name != "") ? user.name : senderEmail) + " is interested in your skills!",
+	message: "User " + ((user.name != null && user.name != "") ? user.name : senderEmail) + " has asked if you are interested in the ideas..."
+    }
+
+    // TODO Create all parts of the message and send to the talent
 }
